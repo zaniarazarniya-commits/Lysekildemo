@@ -177,6 +177,60 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 .home-btn:active { background: var(--sand); }
 .home-btn.hidden { display: none; }
 .home-btn svg { width: 20px; height: 20px; stroke-width: 2; }
+
+/* HAMBURGER-MENY */
+.nav-menu-btn {
+    width: 40px; height: 40px;
+    margin-left: 0;
+    margin-right: -6px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--r-pill);
+    color: var(--gullmarn-deep);
+    flex-shrink: 0;
+    transition: background 140ms var(--in);
+}
+.nav-menu-btn:hover { background: var(--skum); }
+.nav-menu-btn:active { background: var(--sand); }
+.nav-menu-btn svg { width: 22px; height: 22px; stroke-width: 2; }
+
+.nav-drawer {
+    position: absolute;
+    top: calc(var(--header-h) + 8px);
+    right: 12px;
+    background: var(--snacka);
+    border: 1px solid var(--linje-mjuk);
+    border-radius: var(--r-lg);
+    box-shadow: var(--skugga-svav);
+    z-index: 50;
+    min-width: 200px;
+    overflow: hidden;
+    transform: scale(0.92) translateY(-8px);
+    transform-origin: top right;
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 200ms var(--in), opacity 200ms var(--in);
+}
+.nav-drawer.open {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+}
+.nav-drawer-item {
+    display: flex; align-items: center; gap: 14px;
+    width: 100%;
+    padding: 14px 18px;
+    color: var(--text-main);
+    font-size: var(--t-sm);
+    font-weight: 500;
+    border-bottom: 1px solid var(--linje-mjuk);
+    transition: background 120ms var(--in);
+}
+.nav-drawer-item:last-child { border-bottom: none; }
+.nav-drawer-item:hover { background: var(--skum); }
+.nav-drawer-item:active { background: var(--sand); }
+.nav-drawer-item svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--gullmarn); stroke-width: 2; }
+.nav-drawer-item.active { color: var(--gullmarn); }
+.nav-drawer-item.active svg { color: var(--gullmarn); }
 .header-logo { height: 26px; width: auto; }
 .header-title {
     font-family: var(--font-display);
@@ -1156,7 +1210,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
     border-top: 1px solid var(--linje-mjuk);
     padding: 6px 4px 14px;
     box-shadow: 0 -6px 24px rgba(15,46,58,0.08);
-    z-index: 10;
+    z-index: 40;
     position: relative;
 }
 .tab-btn {

@@ -33,8 +33,21 @@
                     <button id="home-btn" class="home-btn hidden" onclick="goHome()" aria-label="Startsida">
                         <i data-lucide="house"></i>
                     </button>
+                    <button id="nav-menu-btn" class="nav-menu-btn" onclick="toggleNavDrawer()" aria-label="Meny">
+                        <i data-lucide="menu"></i>
+                    </button>
                 </div>
             </header>
+
+            <!-- NAV DRAWER -->
+            <div id="nav-drawer" class="nav-drawer" role="menu">
+                <button class="nav-drawer-item" data-tab="home" onclick="navDrawerGo('home')"><i data-lucide="compass"></i> Upptäck</button>
+                <button class="nav-drawer-item" data-tab="map" onclick="navDrawerGo('map')"><i data-lucide="map"></i> Karta</button>
+                <button class="nav-drawer-item" data-tab="eat" onclick="navDrawerGo('eat')"><i data-lucide="utensils"></i> Äta</button>
+                <button class="nav-drawer-item" data-tab="sea" onclick="navDrawerGo('sea')"><i data-lucide="waves"></i> Hav &amp; bad</button>
+                <button class="nav-drawer-item" data-tab="transit" onclick="navDrawerGo('transit')"><i data-lucide="bus"></i> Resa</button>
+                <button class="nav-drawer-item" data-tab="more" onclick="navDrawerGo('more')"><i data-lucide="grid-2x2"></i> Mer</button>
+            </div>
 
             <main class="content-area" id="content-area">
 

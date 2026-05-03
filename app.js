@@ -515,6 +515,35 @@ function goHome() {
     switchTab('home');
 }
 
+function toggleNavDrawer() {
+    const drawer = $('nav-drawer');
+    const isOpen = drawer.classList.contains('open');
+    if (isOpen) {
+        drawer.classList.remove('open');
+    } else {
+        const active = document.querySelector('.nav-drawer-item.active');
+        if (active) active.classList.remove('active');
+        const cur = document.querySelector('.nav-drawer-item[data-tab="' + state.currentTab + '"]');
+        if (cur) cur.classList.add('active');
+        drawer.classList.add('open');
+    }
+}
+
+function navDrawerGo(tab) {
+    $('nav-drawer').classList.remove('open');
+    closeAllSubPages();
+    switchTab(tab);
+}
+
+document.addEventListener('click', e => {
+    const drawer = $('nav-drawer');
+    if (drawer && drawer.classList.contains('open')) {
+        if (!drawer.contains(e.target) && e.target.id !== 'nav-menu-btn' && !$('nav-menu-btn').contains(e.target)) {
+            drawer.classList.remove('open');
+        }
+    }
+});
+
 window.addEventListener('popstate', () => {
     if (_histLock) return;
     if (state.pageStack.length > 0) {
