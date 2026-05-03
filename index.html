@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lysekils Guide</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="mobile-frame">
+
+        <!-- SPLASH -->
+        <div id="splash" class="splash-screen">
+            <div class="splash-content">
+                <img src="assets/liggande_färg.png?v=2" alt="Lysekils kommun" class="splash-logo">
+                <h1 class="splash-title">Välkommen till Lysekil</h1>
+                <p class="splash-subtitle">Din guide till havet, klipporna och de vita husen</p>
+            </div>
+        </div>
+
+        <!-- APP -->
+        <div id="app" class="app-container hidden">
+
+            <header class="app-header">
+                <div class="header-content">
+                    <button id="back-btn" class="back-btn hidden" onclick="goBack()" aria-label="Tillbaka">
+                        <i data-lucide="arrow-left"></i>
+                    </button>
+                    <img src="assets/liggande_färg.png?v=2" alt="" class="header-logo" aria-hidden="true">
+                    <span id="header-title" class="header-title">Lysekil</span>
+                </div>
+            </header>
+
+            <main class="content-area" id="content-area">
+
+                <!-- ============ UPPTÄCK ============ -->
+                <div id="tab-home" class="tab-content active">
+                    <section class="hero" id="home-hero">
+                        <div class="hero-content">
+                            <span class="hero-crest">Idag i Lysekil</span>
+                            <h1 class="hero-title" id="hero-title">Lugnt hav, klar himmel</h1>
+                            <p class="hero-date" id="hero-date">Lördag 4 juli</p>
+                        </div>
+                    </section>
+
+                    <div class="live-row" id="live-row" role="list" aria-label="Aktuellt just nu"></div>
+
+                    <section class="section">
+                        <h2 class="section-title">Hitta snabbt</h2>
+                        <div class="quick-grid" id="quick-grid"></div>
+                    </section>
+
+                    <section class="scroll-area">
+                        <div class="section-header">
+                            <h2 class="section-title">Just nu händer</h2>
+                            <button class="cta-link" onclick="openSubPage('events-list')">Visa alla evenemang →</button>
+                        </div>
+                        <div class="scroll-row" id="events-scroll"></div>
+                    </section>
+
+                    <svg class="wave-divider" viewBox="0 0 420 24" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M0 12 Q 52.5 0, 105 12 T 210 12 T 315 12 T 420 12 V24 H0 Z" fill="currentColor"/>
+                    </svg>
+
+                    <section class="section">
+                        <h2 class="section-title" id="tips-title">Tre tips just nu</h2>
+                        <div class="tip-stack" id="tips-stack"></div>
+                    </section>
+
+                    <section class="section">
+                        <h2 class="section-title">Berättelser från Lysekil</h2>
+                        <div id="stories-stack"></div>
+                    </section>
+
+                    <div class="bottom-pad"></div>
+                </div>
+
+                <!-- ============ KARTA ============ -->
+                <div id="tab-map" class="tab-content">
+                    <div class="map-toolbar">
+                        <div class="filter-row" id="filter-row"></div>
+                    </div>
+                    <div class="map-stage">
+                        <div id="map"></div>
+                        <button class="map-fab" onclick="locateMe()" aria-label="Min position">
+                            <i data-lucide="locate-fixed"></i>
+                        </button>
+                        <div id="poi-sheet" class="poi-sheet">
+                            <div class="poi-handle"></div>
+                            <button class="poi-close" onclick="closePoi()" aria-label="Stäng"><i data-lucide="x"></i></button>
+                            <div class="poi-image" id="poi-image"></div>
+                            <div class="poi-body">
+                                <span class="poi-tag" id="poi-tag">Bad</span>
+                                <h3 class="poi-title" id="poi-title">—</h3>
+                                <p class="poi-desc" id="poi-desc">—</p>
+                                <div class="poi-meta" id="poi-meta"></div>
+                            </div>
+                            <div class="poi-actions">
+                                <button class="poi-action-btn" onclick="poiDirections()">
+                                    <i data-lucide="navigation"></i>
+                                    <span>Vägbeskrivning</span>
+                                </button>
+                                <button class="poi-action-btn secondary" onclick="poiCall()">
+                                    <i data-lucide="phone"></i>
+                                    <span>Ring</span>
+                                </button>
+                                <button class="poi-action-btn secondary" onclick="poiSave()">
+                                    <i data-lucide="bookmark"></i>
+                                    <span>Spara</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ============ ÄTA ============ -->
+                <div id="tab-eat" class="tab-content">
+                    <div class="eat-header">
+                        <h2 class="section-title" style="margin-bottom:6px;">Äta i Lysekil</h2>
+                        <p class="setting-sub" style="font-size:var(--t-md); color:var(--text-mjuk);">Dagens lunch, restauranger och fika.</p>
+                    </div>
+                    <div class="map-toolbar" style="border-top: 1px solid var(--linje-mjuk);">
+                        <div class="filter-row" id="eat-filter"></div>
+                    </div>
+                    <div class="list-section" id="eat-list"></div>
+                    <div class="bottom-pad"></div>
+                </div>
+
+                <!-- ============ RESA ============ -->
+                <div id="tab-transit" class="tab-content">
+                    <div class="transit-hero" id="transit-hero">
+                        <div class="transit-hero-label">Närmaste avgång</div>
+                        <div class="transit-hero-name" id="transit-hero-name">Personfärjan till Fiskebäckskil</div>
+                        <div class="transit-hero-time" id="transit-hero-time">8<small>min</small></div>
+                        <div class="transit-hero-meta" id="transit-hero-meta">Avgår 14:30 från Södra Hamnen</div>
+                    </div>
+                    <div id="transit-list"></div>
+                    <div class="bottom-pad"></div>
+                </div>
+
+                <!-- ============ HAV & BAD ============ -->
+                <div id="tab-sea" class="tab-content">
+                    <div class="sea-hero">
+                        <div class="sea-hero-kicker">Idag vid havet</div>
+                        <h2 class="sea-hero-title">17° i vattnet, lätt sydvästlig vind</h2>
+                        <div class="sea-stats">
+                            <div>
+                                <div class="sea-stat-label">Vattentemp medel</div>
+                                <div class="sea-stat-value">17<small>°C</small></div>
+                            </div>
+                            <div>
+                                <div class="sea-stat-label">Vind</div>
+                                <div class="sea-stat-value">4<small>m/s SV</small></div>
+                            </div>
+                            <div>
+                                <div class="sea-stat-label">UV-index</div>
+                                <div class="sea-stat-value">5<small>medel</small></div>
+                            </div>
+                            <div>
+                                <div class="sea-stat-label">Algvarning</div>
+                                <div class="sea-stat-value" style="font-size:20px;">
+                                    <span class="alg-flag gron">Inget alarm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section" style="padding-top: 8px;">
+                        <h3 class="sub-h3" style="margin-top:0;">Bästa badet just nu</h3>
+                        <div id="best-beach"></div>
+                    </div>
+
+                    <div class="list-section">
+                        <div class="section-header" style="margin-bottom: 12px; padding: 0;">
+                            <h3 class="sub-h3" style="margin: 0;">Alla badplatser</h3>
+                        </div>
+                        <div id="beach-list"></div>
+                    </div>
+
+                    <div class="harbor-card">
+                        <div style="font-size:var(--t-xs); text-transform:uppercase; letter-spacing:0.1em; opacity:0.75;">Gästhamnen Lysekil</div>
+                        <div class="harbor-status-row">
+                            <div class="harbor-big">12</div>
+                            <div class="harbor-sub">av 80 platser lediga</div>
+                        </div>
+                        <div class="harbor-services">
+                            <span>Dusch</span><span>Tvätt</span><span>Septik</span><span>Diesel</span><span>El</span><span>Vatten</span>
+                        </div>
+                        <button class="btn full" onclick="toast('Bokningsfunktionen kommer i full version')">
+                            <i data-lucide="anchor"></i> Boka plats
+                        </button>
+                    </div>
+
+                    <div class="bottom-pad"></div>
+                </div>
+
+                <!-- ============ MER ============ -->
+                <div id="tab-more" class="tab-content">
+                    <div class="more-group" style="padding-top: 24px;">
+                        <div class="more-group-label">Upplev</div>
+                        <div class="more-list">
+                            <button class="more-item" onclick="openSubPage('hiking-list')">
+                                <span class="more-item-icon"><i data-lucide="mountain"></i></span>
+                                <span class="more-item-text">Vandring & natur</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                            <button class="more-item" onclick="openSubPage('shops-list')">
+                                <span class="more-item-icon"><i data-lucide="shopping-bag"></i></span>
+                                <span class="more-item-text">Butiker & hantverk</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                            <button class="more-item" onclick="openSubPage('stay-list')">
+                                <span class="more-item-icon"><i data-lucide="bed"></i></span>
+                                <span class="more-item-text">Boende</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                            <button class="more-item" onclick="openSubPage('events-list')">
+                                <span class="more-item-icon"><i data-lucide="calendar"></i></span>
+                                <span class="more-item-text">Evenemang</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="more-group">
+                        <div class="more-group-label">Service & samhälle</div>
+                        <div class="more-list">
+                            <button class="more-item" onclick="openSubPage('report')">
+                                <span class="more-item-icon" style="background: var(--granit-soft); color: var(--granit);"><i data-lucide="alert-triangle"></i></span>
+                                <span class="more-item-text">Felanmälan</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                            <button class="more-item" onclick="openSubPage('waste')">
+                                <span class="more-item-icon"><i data-lucide="recycle"></i></span>
+                                <span class="more-item-text">Sophämtning & återvinning</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                            <button class="more-item" onclick="openSubPage('service')">
+                                <span class="more-item-icon"><i data-lucide="map-pin"></i></span>
+                                <span class="more-item-text">Parkering, toaletter, bankomater</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                            <button class="more-item" onclick="openSubPage('healthcare')">
+                                <span class="more-item-icon"><i data-lucide="heart-pulse"></i></span>
+                                <span class="more-item-text">Vårdcentral & apotek</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="more-group">
+                        <div class="more-group-label">Appen</div>
+                        <div class="more-list">
+                            <button class="more-item" onclick="openSubPage('accessibility')">
+                                <span class="more-item-icon"><i data-lucide="accessibility"></i></span>
+                                <span class="more-item-text">Tillgänglighet</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                            <button class="more-item" onclick="openSubPage('settings')">
+                                <span class="more-item-icon"><i data-lucide="settings"></i></span>
+                                <span class="more-item-text">Inställningar & språk</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                            <button class="more-item" onclick="openSubPage('about')">
+                                <span class="more-item-icon"><i data-lucide="info"></i></span>
+                                <span class="more-item-text">Om Lysekils Guide</span>
+                                <i data-lucide="chevron-right" class="more-item-chevron"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bottom-pad"></div>
+                </div>
+
+                <!-- ============ SUB-PAGE (delad) ============ -->
+                <div id="sub-page" class="sub-page" aria-hidden="true">
+                    <div id="sub-page-content"></div>
+                </div>
+
+            </main>
+
+            <!-- BOTTEN-TABBAR -->
+            <nav class="bottom-tabs" id="bottom-tabs" aria-label="Huvudnavigation">
+                <button class="tab-btn active" data-tab="home" aria-label="Upptäck">
+                    <i data-lucide="compass"></i><span>Upptäck</span>
+                </button>
+                <button class="tab-btn" data-tab="map" aria-label="Karta">
+                    <i data-lucide="map"></i><span>Karta</span>
+                </button>
+                <button class="tab-btn" data-tab="eat" aria-label="Äta">
+                    <i data-lucide="utensils"></i><span>Äta</span>
+                </button>
+                <button class="tab-btn" data-tab="transit" aria-label="Resa">
+                    <i data-lucide="bus"></i><span>Resa</span>
+                </button>
+                <button class="tab-btn" data-tab="sea" aria-label="Hav och bad">
+                    <i data-lucide="waves"></i><span>Hav &amp; bad</span>
+                </button>
+                <button class="tab-btn" data-tab="more" aria-label="Mer">
+                    <i data-lucide="menu"></i><span>Mer</span>
+                </button>
+            </nav>
+
+        </div>
+
+        <div id="toast" class="toast"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
