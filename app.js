@@ -34,7 +34,7 @@ const IMG = {
 
 const QUICK_TILES = [
     { id: 'events',  label: 'Evenemang',  icon: 'calendar',       page: 'events-list' },
-    { id: 'eat',     label: 'Mat & fika', icon: 'utensils',       tab: 'eat' },
+    { id: 'eat',     label: 'Mat & fika', icon: 'utensils',       page: 'eat-list' },
     { id: 'hike',    label: 'Vandring',   icon: 'mountain',       page: 'hiking-list' },
     { id: 'sea',     label: 'Hav & bad',  icon: 'waves',          tab: 'sea' },
     { id: 'stay',    label: 'Boende',     icon: 'bed',            page: 'stay-list' },
@@ -447,6 +447,7 @@ function renderTransit() {
 
 const SUB_TITLES = {
     'events-list': 'Evenemang', 'hiking-list': 'Vandring', 'shops-list': 'Butiker',
+    'eat-list': 'Mat & fika',
     'stay-list': 'Boende', 'report': 'Felanmälan', 'service': 'Service',
     'healthcare': 'Vård & apotek', 'waste': 'Sophämtning', 'accessibility': 'Tillgänglighet',
     'settings': 'Inställningar', 'about': 'Om appen'
@@ -547,6 +548,17 @@ function renderSubPage(routeId) {
     const parts = routeId.includes(':') ? routeId.split(':') : [routeId, null];
     const type = parts[0];
     const id = parts[1];
+
+    if (routeId === 'eat-list') {
+        const html = RESTAURANTS.map(r => {
+            const kicker = r.cat === 'lunch' ? '<div class="list-card-kicker">Dagens lunch</div>' : (r.cat === 'cafe' ? '<div class="list-card-kicker">Café & fika</div>' : (r.cat === 'glass' ? '<div class="list-card-kicker">Glass</div>' : ''));
+            const desc = r.cat === 'lunch' ? r.dish : r.desc;
+            const price = r.cat === 'lunch' ? '<span><strong>' + r.price + '</strong></span>' : '';
+            return '<button class="list-card" onclick="openSubPage(\'eat:' + r.id + '\')"><div class="list-card-image" style="background-image:url(\'' + r.img + '\')"></div><div class="list-card-body">' + kicker + '<div class="list-card-title">' + r.title + '</div><div class="list-card-desc">' + desc + '</div><div class="list-card-meta">' + price + '<span>' + r.hours + '</span></div></div></button>';
+        }).join('');
+        c.innerHTML = listPage('Mat & fika', 'Äta i Lysekil', IMG.hamnkrogen, html);
+        refreshIcons(); return;
+    }
 
     if (routeId === 'events-list') {
         const html = EVENTS.map(ev => '<button class="list-card" onclick="openSubPage(\'event:' + ev.id + '\')"><div class="list-card-image" style="background-image:url(\'' + ev.img + '\')"></div><div class="list-card-body"><div class="list-card-kicker">' + ev.date + '</div><div class="list-card-title">' + ev.title + '</div><div class="list-card-desc">' + ev.short + '</div><div class="list-card-meta"><span>' + ev.place + '</span></div></div></button>').join('');
