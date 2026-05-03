@@ -100,6 +100,7 @@ const HIKING = [
 ];
 
 const SHOPS = [
+    { id: 'saltbacken', title: 'Saltbacken', desc: 'Heminredning, design och hantverk — noga utvalda produkter för vackra hem. Designklassiker, nyheter och vardagliga bruksföremål samsas med möbler och vintage. Utför även inredningsuppdrag och styling inför försäljning.', meta: 'Kungstorget · Lysekil', img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80' },
     { id: 'fiskbutik', title: 'Lysekils Fisk & Skaldjur', desc: 'Färsk fisk direkt från båten. Räkor, kräftor och hummer i säsong.', meta: 'Hamnen · Mån–lör 09–17', img: IMG.fiskbutik },
     { id: 'bohuslanshantverk', title: 'Bohuslänshantverk', desc: 'Lokalt hantverk, keramik, textil. Verkstad öppnar bakom butiken.', meta: 'Kungsgatan 12 · Mån–fre 10–18', img: IMG.keramik },
     { id: 'kustensdeli', title: 'Kustens Deli', desc: 'Delikatesser, ost, chark och Bohusläns egna marmelader.', meta: 'Stora Torget 3 · Mån–lör 09–18', img: IMG.deli }
