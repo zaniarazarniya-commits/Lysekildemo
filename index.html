@@ -30,6 +30,9 @@
                     </button>
                     <img src="assets/liggande_färg.png?v=2" alt="" class="header-logo" aria-hidden="true">
                     <span id="header-title" class="header-title">Lysekil</span>
+                    <button id="home-btn" class="home-btn hidden" onclick="goHome()" aria-label="Startsida">
+                        <i data-lucide="house"></i>
+                    </button>
                 </div>
             </header>
 
@@ -274,12 +277,13 @@
                     <div class="bottom-pad"></div>
                 </div>
 
-                <!-- ============ SUB-PAGE (delad) ============ -->
-                <div id="sub-page" class="sub-page" aria-hidden="true">
-                    <div id="sub-page-content"></div>
-                </div>
 
             </main>
+
+            <!-- ============ SUB-PAGE (delad) ============ -->
+            <div id="sub-page" class="sub-page" aria-hidden="true">
+                <div id="sub-page-content"></div>
+            </div>
 
             <!-- BOTTEN-TABBAR -->
             <nav class="bottom-tabs" id="bottom-tabs" aria-label="Huvudnavigation">

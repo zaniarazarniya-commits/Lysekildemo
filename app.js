@@ -459,29 +459,74 @@ function subPageTitle(routeId) {
              'report-step':'Felanmälan', 'report-success':'Bekräftelse' }[type] || 'Lysekil';
 }
 
-function openSubPage(routeId) {
-    state.pageStack.push(routeId);
+let _histLock = false;
+
+function _showSubPageUI(routeId) {
     renderSubPage(routeId);
     $('sub-page').classList.add('open');
     $('sub-page').setAttribute('aria-hidden', 'false');
     $('back-btn').classList.remove('hidden');
+    $('home-btn').classList.remove('hidden');
     $('header-title').textContent = subPageTitle(routeId);
 }
-function goBack() {
-    state.pageStack.pop();
-    if (state.pageStack.length === 0) closeAllSubPages();
-    else {
-        renderSubPage(state.pageStack[state.pageStack.length - 1]);
-        $('header-title').textContent = subPageTitle(state.pageStack[state.pageStack.length - 1]);
-    }
-}
-function closeAllSubPages() {
-    state.pageStack = [];
+
+function _hideSubPageUI() {
     $('sub-page').classList.remove('open');
     $('sub-page').setAttribute('aria-hidden', 'true');
     $('back-btn').classList.add('hidden');
+    $('home-btn').classList.add('hidden');
     $('header-title').textContent = 'Lysekil';
 }
+
+function openSubPage(routeId) {
+    state.pageStack.push(routeId);
+    history.pushState({ lysGuide: true, route: routeId }, '');
+    _showSubPageUI(routeId);
+}
+
+function goBack() {
+    if (!state.pageStack.length) return;
+    state.pageStack.pop();
+    _histLock = true;
+    history.back();
+    setTimeout(() => { _histLock = false; }, 80);
+    if (state.pageStack.length === 0) {
+        _hideSubPageUI();
+    } else {
+        const prev = state.pageStack[state.pageStack.length - 1];
+        renderSubPage(prev);
+        $('header-title').textContent = subPageTitle(prev);
+    }
+}
+
+function closeAllSubPages() {
+    const depth = state.pageStack.length;
+    if (!depth) return;
+    _histLock = true;
+    history.go(-depth);
+    setTimeout(() => { _histLock = false; }, 200);
+    state.pageStack = [];
+    _hideSubPageUI();
+}
+
+function goHome() {
+    closeAllSubPages();
+    switchTab('home');
+}
+
+window.addEventListener('popstate', () => {
+    if (_histLock) return;
+    if (state.pageStack.length > 0) {
+        state.pageStack.pop();
+        if (state.pageStack.length === 0) {
+            _hideSubPageUI();
+        } else {
+            const prev = state.pageStack[state.pageStack.length - 1];
+            renderSubPage(prev);
+            $('header-title').textContent = subPageTitle(prev);
+        }
+    }
+});
 
 function subHeader(title, kicker, img) {
     const k = kicker ? '<div class="sub-kicker">' + kicker + '</div>' : '';
@@ -498,6 +543,7 @@ function subDetailSimple(title, kicker, img, body) {
 
 function renderSubPage(routeId) {
     const c = $('sub-page-content');
+    c.scrollTop = 0;
     const parts = routeId.includes(':') ? routeId.split(':') : [routeId, null];
     const type = parts[0];
     const id = parts[1];

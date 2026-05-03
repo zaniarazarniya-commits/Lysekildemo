@@ -54,6 +54,10 @@
     --r-pill: 999px;
 
     --in: cubic-bezier(.2,.7,.3,1);
+
+    /* Layout-höjder */
+    --header-h: 65px;
+    --tabbar-h: 77px;
 }
 
 [data-text-size="stor"] {
@@ -141,7 +145,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 .app-container.hidden { display: none; }
 
 .app-header {
-    position: relative; z-index: 10;
+    position: relative; z-index: 35;
     background: var(--snacka);
     border-bottom: 1px solid var(--linje-mjuk);
     padding: 14px 20px;
@@ -154,15 +158,33 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
     display: flex; align-items: center; justify-content: center;
     border-radius: var(--r-pill);
     color: var(--gullmarn-deep);
+    transition: background 140ms var(--in);
 }
 .back-btn:hover { background: var(--skum); }
+.back-btn:active { background: var(--sand); }
 .back-btn.hidden { display: none; }
+.home-btn {
+    width: 40px; height: 40px;
+    margin-left: auto;
+    margin-right: -6px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--r-pill);
+    color: var(--gullmarn);
+    flex-shrink: 0;
+    transition: background 140ms var(--in), color 140ms var(--in);
+}
+.home-btn:hover { background: var(--skum); color: var(--gullmarn-deep); }
+.home-btn:active { background: var(--sand); }
+.home-btn.hidden { display: none; }
+.home-btn svg { width: 20px; height: 20px; stroke-width: 2; }
 .header-logo { height: 26px; width: auto; }
 .header-title {
     font-family: var(--font-display);
     font-weight: 500; font-size: 20px;
     color: var(--gullmarn-deep);
     letter-spacing: -0.01em;
+    flex: 1;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 
 .content-area {
@@ -315,6 +337,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
     transition: transform 180ms var(--in), box-shadow 180ms var(--in);
 }
 .event-card:hover { transform: translateY(-2px); box-shadow: var(--skugga-vila); }
+.event-card:active { transform: translateY(1px) scale(0.99); box-shadow: none; }
 .event-card-image {
     height: 160px;
     background-size: cover; background-position: center;
@@ -358,6 +381,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
     transition: transform 180ms var(--in), box-shadow 180ms var(--in);
 }
 .tip-card:hover { transform: translateY(-2px); box-shadow: var(--skugga-vila); }
+.tip-card:active { transform: translateY(1px) scale(0.99); box-shadow: none; }
 .tip-card-image {
     background-size: cover; background-position: center;
     background-color: var(--sand);
@@ -572,6 +596,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
     transition: transform 180ms var(--in), box-shadow 180ms var(--in);
 }
 .list-card:hover { transform: translateY(-1px); box-shadow: var(--skugga-vila); }
+.list-card:active { transform: translateY(1px) scale(0.99); box-shadow: none; }
 .list-card-image {
     width: 120px; flex-shrink: 0;
     background-size: cover; background-position: center;
@@ -834,12 +859,17 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 
 /* SUB-PAGE */
 .sub-page {
-    position: absolute; inset: 0;
+    position: absolute;
+    top: var(--header-h);
+    left: 0; right: 0;
+    bottom: var(--tabbar-h);
     background: var(--snacka);
-    z-index: 20;
+    z-index: 30;
     overflow-y: auto;
+    overflow-x: hidden;
     transform: translateX(100%);
-    transition: transform 280ms var(--in);
+    transition: transform 320ms cubic-bezier(.25,.8,.25,1);
+    will-change: transform;
     display: flex;
     flex-direction: column;
 }
@@ -853,7 +883,7 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
 }
 .sub-page-header-img::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(180deg, rgba(15,46,58,0.45) 0%, rgba(15,46,58,0.0) 30%, rgba(15,46,58,0.0) 60%, rgba(15,46,58,0.55) 100%);
+    background: linear-gradient(180deg, rgba(15,46,58,0.5) 0%, rgba(15,46,58,0.0) 35%, rgba(15,46,58,0.0) 55%, rgba(15,46,58,0.65) 100%);
 }
 .sub-back {
     position: absolute; top: 16px; left: 16px;
@@ -1125,8 +1155,9 @@ button:focus-visible, a:focus-visible, [tabindex]:focus-visible {
     background: var(--snacka);
     border-top: 1px solid var(--linje-mjuk);
     padding: 6px 4px 14px;
-    box-shadow: 0 -4px 16px rgba(15,46,58,0.04);
-    z-index: 5;
+    box-shadow: 0 -6px 24px rgba(15,46,58,0.08);
+    z-index: 10;
+    position: relative;
 }
 .tab-btn {
     flex: 1;
