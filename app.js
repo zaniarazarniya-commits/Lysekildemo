@@ -36,7 +36,7 @@ const QUICK_TILES = [
     { id: 'events',  label: 'Evenemang',  icon: 'calendar',       page: 'events-list' },
     { id: 'eat',     label: 'Mat & fika', icon: 'utensils',       page: 'eat-list' },
     { id: 'hike',    label: 'Vandring',   icon: 'mountain',       page: 'hiking-list' },
-    { id: 'sea',     label: 'Hav & bad',  icon: 'waves',          tab: 'sea' },
+    { id: 'sea',     label: 'Hav & bad',  icon: 'waves',          page: 'sea-list' },
     { id: 'stay',    label: 'Boende',     icon: 'bed',            page: 'stay-list' },
     { id: 'shops',   label: 'Butiker',    icon: 'shopping-bag',   page: 'shops-list' }
 ];
@@ -54,16 +54,16 @@ const TIPS_BY_TIME = {
     morgon: [
         { tag: 'Promenad', title: 'Tidig vandring vid Stångehuvud', meta: '40 min · röda klippor i morgonljuset', img: IMG.stangehuvud, page: 'hike:stangehuvud' },
         { tag: 'Frukost', title: 'Fika på Bryggan Café', meta: 'Öppet från 08:00 · vid hamnen', img: IMG.bryggancafe, page: 'eat:bryggancafe' },
-        { tag: 'Hav', title: 'Tag bilfärjan över Gullmarn', meta: 'Finnsbo → Skår · gratis · 5 min', img: IMG.bilfarjan, tab: 'transit' }
+        { tag: 'Hav', title: 'Tag bilfärjan över Gullmarn', meta: 'Finnsbo → Skår · gratis · 5 min', img: IMG.bilfarjan, page: 'transit:ferry-car' }
     ],
     middag: [
         { tag: 'Bad', title: 'Pinneviken — sandig och lugn', meta: '15 min till fots · 17° i vattnet', img: IMG.pinneviken, page: 'beach:pinneviken' },
-        { tag: 'Lunch', title: 'Lunch i Fiskebäckskil', meta: 'Tag personfärjan · 7 min över', img: IMG.fiskebackskil, tab: 'transit' },
+        { tag: 'Lunch', title: 'Lunch i Fiskebäckskil', meta: 'Tag personfärjan · 7 min över', img: IMG.fiskebackskil, page: 'transit:ferry-passenger' },
         { tag: 'Stad', title: 'Stadsvandring i Gamlestan', meta: '1 h · de vita träfasaderna', img: IMG.vitaHus, page: 'story:vitahus' }
     ],
     eftermiddag: [
         { tag: 'Glass', title: 'Glass på Hamnpiren', meta: 'Skum eller granit, du väljer', img: IMG.glasskiosk, page: 'eat:hamnglassen' },
-        { tag: 'Hav', title: 'Tuff-tuff till Stångehuvud', meta: 'Avgår 14:00 från Stora Torget', img: IMG.tuffTuff, tab: 'transit' },
+        { tag: 'Hav', title: 'Tuff-tuff till Stångehuvud', meta: 'Avgår 14:00 från Stora Torget', img: IMG.tuffTuff, page: 'transit:tufftuff' },
         { tag: 'Marknad', title: 'Lokalt hantverk på Kungsgatan', meta: 'Bohuslänshantverk · keramik & textil', img: IMG.keramik, page: 'shop:bohuslanshantverk' }
     ],
     kvall: [
@@ -447,7 +447,7 @@ function renderTransit() {
 
 const SUB_TITLES = {
     'events-list': 'Evenemang', 'hiking-list': 'Vandring', 'shops-list': 'Butiker',
-    'eat-list': 'Mat & fika',
+    'eat-list': 'Mat & fika', 'sea-list': 'Hav & bad',
     'stay-list': 'Boende', 'report': 'Felanmälan', 'service': 'Service',
     'healthcare': 'Vård & apotek', 'waste': 'Sophämtning', 'accessibility': 'Tillgänglighet',
     'settings': 'Inställningar', 'about': 'Om appen'
@@ -548,6 +548,18 @@ function renderSubPage(routeId) {
     const parts = routeId.includes(':') ? routeId.split(':') : [routeId, null];
     const type = parts[0];
     const id = parts[1];
+
+    if (routeId === 'sea-list') {
+        const best = BEACHES.slice().sort((a, b) => b.temp - a.temp)[0];
+        const html = BEACHES.map(b => {
+            const access = b.access ? '<span class="access-badge"><i data-lucide="accessibility" style="width:12px;height:12px;"></i> Anpassad</span>' : '';
+            const algLabel = b.alg === 'gron' ? 'Algfritt' : (b.alg === 'gul' ? 'Varning' : 'Stängt');
+            const kicker = b.id === best.id ? '<div class="list-card-kicker">Varmast just nu</div>' : '';
+            return '<button class="list-card" onclick="openSubPage(\'beach:' + b.id + '\')"><div class="list-card-image" style="background-image:url(\'' + b.img + '\')"></div><div class="list-card-body">' + kicker + '<div class="list-card-title">' + b.title + '</div><div class="list-card-desc">' + b.desc + '</div><div class="list-card-meta"><span class="beach-temp">' + b.temp + '<small>°C</small></span><span>' + b.wind + '</span><span class="alg-flag ' + b.alg + '">' + algLabel + '</span>' + access + '</div></div></button>';
+        }).join('');
+        c.innerHTML = listPage('Hav & bad', 'Badplatser i Lysekil', IMG.pinneviken, html);
+        refreshIcons(); return;
+    }
 
     if (routeId === 'eat-list') {
         const html = RESTAURANTS.map(r => {
