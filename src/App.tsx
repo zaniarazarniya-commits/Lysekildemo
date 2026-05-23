@@ -16,7 +16,7 @@ import {
 import { colors } from "./theme";
 
 /* Screens */
-import HomeScreen from "./components/HomeScreen";
+import HomeScreen from "./screens/HomeScreen";
 import MapScreen from "./components/MapScreen";
 
 /* Features (also serve as tab screens) */
