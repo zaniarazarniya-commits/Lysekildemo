@@ -32,7 +32,7 @@ const CATEGORY_COLORS: Record<string, [string, string]> = {
   Övrigt:      ["#C4B8A8", "#EDE8E0"],
 };
 
-export default function PlaceCard({ place, onPress }: PlaceCardProps) {
+function PlaceCard({ place, onPress }: PlaceCardProps) {
   const { open, label } = getOpenStatus(place);
   const [colorA, colorB] = CATEGORY_COLORS[place.category] ?? ["#2D6A8E", "#4A8BAF"];
 
@@ -84,6 +84,8 @@ export default function PlaceCard({ place, onPress }: PlaceCardProps) {
     </TouchableOpacity>
   );
 }
+
+export default React.memo(PlaceCard);
 
 const styles = StyleSheet.create({
   card: {

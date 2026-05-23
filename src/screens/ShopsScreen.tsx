@@ -60,6 +60,8 @@ export default function ShopsScreen({ navigation }: Props) {
             placeholderTextColor={colors.granite}
             value={searchQuery}
             onChangeText={setSearchQuery}
+            returnKeyType="search"
+            blurOnSubmit
           />
         </View>
         <View style={styles.chips}>
