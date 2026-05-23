@@ -211,9 +211,11 @@ export function isOpenNow(place: Pick<Place, "opensAt" | "openUntil">): boolean 
   const todayClose = new Date(now);
   todayClose.setHours(closeH, closeM, 0, 0);
 
-  // Om stängningstid < öppningstid → stänger efter midnatt
-  if (todayClose <= todayOpen) {
-    todayClose.setDate(todayClose.getDate() + 1);
+  // Om stängningstid < öppningstid → platsen spänner över midnatt
+  // (t.ex. öppnar 16:00, stänger 01:00 nästa dag)
+  // Öppen om: nu >= öppningstid ELLER nu < stängningstid (efter midnatt)
+  if (todayClose < todayOpen) {
+    return now >= todayOpen || now < todayClose;
   }
 
   return now >= todayOpen && now < todayClose;
@@ -223,6 +225,8 @@ export function isOpenNow(place: Pick<Place, "opensAt" | "openUntil">): boolean 
  * Returnerar öppet/stängt-text och nästa händelse.
  * Ex: { open: true, label: "Stänger 22:00" }
  *     { open: false, label: "Öppnar 11:00" }
+ * NOTE: Konsulterar inte openHours (per-dag-schema).
+ * Dag-specifika stängningar (t.ex. "Stängt" måndag) reflekteras ej.
  */
 export function getOpenStatus(place: Place): { open: boolean; label: string } {
   const open = isOpenNow(place);

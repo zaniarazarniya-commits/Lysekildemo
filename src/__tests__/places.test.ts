@@ -2,7 +2,6 @@ import {
   filterPlaces,
   isOpenNow,
   MOCK_RESTAURANTS,
-  MOCK_SHOPS,
 } from "../data/places";
 
 describe("filterPlaces", () => {
@@ -43,5 +42,17 @@ describe("isOpenNow", () => {
 
   it("returnerar false om openUntil saknas", () => {
     expect(isOpenNow({})).toBe(false);
+  });
+
+  it("returnerar true för midnattsöppen plats kl 00:30 (stänger 01:00)", () => {
+    jest.useFakeTimers().setSystemTime(new Date("2026-05-24T00:30:00"));
+    expect(isOpenNow({ opensAt: "16:00", openUntil: "01:00" })).toBe(true);
+    jest.useRealTimers();
+  });
+
+  it("returnerar false för midnattsöppen plats kl 02:00 (stänger 01:00)", () => {
+    jest.useFakeTimers().setSystemTime(new Date("2026-05-24T02:00:00"));
+    expect(isOpenNow({ opensAt: "16:00", openUntil: "01:00" })).toBe(false);
+    jest.useRealTimers();
   });
 });
