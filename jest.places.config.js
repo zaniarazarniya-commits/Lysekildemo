@@ -13,5 +13,5 @@ module.exports = {
   transformIgnorePatterns: [
     "node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|babel-preset-expo)",
   ],
-  testMatch: ["**/src/__tests__/places.test.ts", "**/src/__tests__/events.test.ts"],
+  testMatch: ["**/src/__tests__/places.test.ts", "**/src/__tests__/events.test.ts", "**/src/__tests__/services.test.ts"],
 };
