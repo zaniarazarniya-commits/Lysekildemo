@@ -10,13 +10,10 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
 } from "react-native";
 import { Star, Clock, Circle } from "lucide-react-native";
 import { colors, shadows, radius, spacing, typography } from "../theme";
 import { Place, getOpenStatus } from "../data/places";
-
-const { width } = Dimensions.get("window");
 
 interface PlaceCardProps {
   place: Place;
