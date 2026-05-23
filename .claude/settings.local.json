@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(superpowers:brainstorming)",
+      "Skill(superpowers:brainstorming:*)",
+      "Bash(bash \"C:/Users/zania/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.7/skills/brainstorming/scripts/start-server.sh\" --project-dir \"C:/Users/zania/Documents/Cursor/Ltown\")",
+      "Skill(superpowers:writing-plans)",
+      "Skill(superpowers:writing-plans:*)",
+      "Bash(git add *)",
+      "Bash(git commit -m 'docs: add Lysekil app v2 implementation plan *)",
+      "Skill(superpowers:subagent-driven-development)",
+      "Skill(superpowers:subagent-driven-development:*)",
+      "Skill(superpowers:using-git-worktrees)",
+      "Skill(superpowers:using-git-worktrees:*)",
+      "Bash(ls -d .worktrees)",
+      "Bash(ls -d worktrees)",
+      "Bash(cat CLAUDE.md)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\zania\\\\Documents\\\\Cursor\\\\Ltown\" -Force)",
+      "Bash(Select-Object Name, LastWriteTime)",
+      "PowerShell(npx create-expo-app@latest --help 2>&1)"
+    ]
+  }
+}

@@ -1,0 +1,89 @@
+<h2>Uppdaterad appstruktur — 6 flikar</h2>
+<p class="subtitle">Evenemangsflik tillagd · Mock-data först · API:er sist</p>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 1.5rem;">
+
+  <div style="background: #fff; border: 2px solid #2D6A8E; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 18px; text-align: center;">🏠</div>
+    <div style="font-size: 13px; font-weight: 700; color: #2D6A8E; text-align: center;">Hem</div>
+    <div style="font-size: 11px; color: #555; line-height: 1.5;">• Färjestatus-widget<br>• Snabbknappar<br>• Öppet just nu</div>
+    <div style="font-size: 10px; background: rgba(74,124,89,0.1); color: #4A7C59; border-radius: 6px; padding: 3px 6px; font-weight: 700; text-align: center;">OMBYGGD</div>
+  </div>
+
+  <div style="background: #fff; border: 2px solid #f5576c; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 18px; text-align: center;">🍽️</div>
+    <div style="font-size: 13px; font-weight: 700; color: #f5576c; text-align: center;">Restauranger</div>
+    <div style="font-size: 11px; color: #555; line-height: 1.5;">• Foto, rating, öppet/stängt<br>• Filter: Mat / Fika / Bar<br>• Sök + Detaljsida</div>
+    <div style="font-size: 10px; background: rgba(45,106,142,0.1); color: #2D6A8E; border-radius: 6px; padding: 3px 6px; font-weight: 700; text-align: center;">NYTT</div>
+  </div>
+
+  <div style="background: #fff; border: 2px solid #c44de0; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 18px; text-align: center;">🛍️</div>
+    <div style="font-size: 13px; font-weight: 700; color: #c44de0; text-align: center;">Butiker</div>
+    <div style="font-size: 11px; color: #555; line-height: 1.5;">• Foto, kategori, öppettider<br>• Filter: Kläder / Mat / Souvenir<br>• Sök + Detaljsida</div>
+    <div style="font-size: 10px; background: rgba(45,106,142,0.1); color: #2D6A8E; border-radius: 6px; padding: 3px 6px; font-weight: 700; text-align: center;">NYTT</div>
+  </div>
+
+  <div style="background: #fff; border: 2px solid #667eea; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 18px; text-align: center;">📅</div>
+    <div style="font-size: 13px; font-weight: 700; color: #667eea; text-align: center;">Evenemang</div>
+    <div style="font-size: 11px; color: #555; line-height: 1.5;">• "Händer idag" högst upp<br>• "Kommande" nedan<br>• Datum, titel, kort beskrivning</div>
+    <div style="font-size: 10px; background: rgba(45,106,142,0.1); color: #2D6A8E; border-radius: 6px; padding: 3px 6px; font-weight: 700; text-align: center;">NYTT</div>
+  </div>
+
+  <div style="background: #fff; border: 2px solid #43e97b; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 18px; text-align: center;">🗺️</div>
+    <div style="font-size: 13px; font-weight: 700; color: #27a355; text-align: center;">Karta</div>
+    <div style="font-size: 11px; color: #555; line-height: 1.5;">• Fullskärmskarta<br>• Filter: Restaurang / Butik<br>• Markör → mini-kort</div>
+    <div style="font-size: 10px; background: rgba(74,124,89,0.1); color: #4A7C59; border-radius: 6px; padding: 3px 6px; font-weight: 700; text-align: center;">ANPASSAD</div>
+  </div>
+
+  <div style="background: #fff; border: 2px solid #2D6A8E; border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 6px;">
+    <div style="font-size: 18px; text-align: center;">⛴️</div>
+    <div style="font-size: 13px; font-weight: 700; color: #2D6A8E; text-align: center;">Färja</div>
+    <div style="font-size: 11px; color: #555; line-height: 1.5;">• Nedräkning nästa avgång<br>• Tidtabell ↔ Fiskebäckskil<br>• Påminn mig-knapp</div>
+    <div style="font-size: 10px; background: rgba(74,124,89,0.1); color: #4A7C59; border-radius: 6px; padding: 3px 6px; font-weight: 700; text-align: center;">ÅTERANVÄND</div>
+  </div>
+
+</div>
+
+<!-- Events detail -->
+<div style="background: rgba(102,126,234,0.06); border: 1.5px solid #667eea; border-radius: 12px; padding: 14px; margin-top: 14px;">
+  <div style="font-size: 11px; font-weight: 700; color: #667eea; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">📅 Evenemangsfliken — hur det ser ut</div>
+  <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 12px; color: #444; line-height: 1.8;">
+    <div>
+      <strong>Händer idag</strong><br>
+      • Horisontell scroll med dagens event<br>
+      • Datum-badge, titel, plats<br>
+      • Tomt-state: "Inga evenemang idag"
+    </div>
+    <div>
+      <strong>Kommande</strong><br>
+      • Vertikal lista sorterad på datum<br>
+      • Datum, titel, kort beskrivning<br>
+      • Manuellt ifylld mock-data
+    </div>
+  </div>
+</div>
+
+<!-- Build order -->
+<div style="background: rgba(45,106,142,0.06); border-radius: 12px; padding: 14px; margin-top: 12px;">
+  <div style="font-size: 11px; font-weight: 700; color: #2D6A8E; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">🔨 Byggordning</div>
+  <div style="display: flex; gap: 6px; flex-wrap: wrap; align-items: center;">
+    <span style="background: #2D6A8E; color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600;">1. Mock-data & typer</span>
+    <span style="color: #aaa;">→</span>
+    <span style="background: #2D6A8E; color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600;">2. RestaurantsScreen</span>
+    <span style="color: #aaa;">→</span>
+    <span style="background: #2D6A8E; color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600;">3. ShopsScreen</span>
+    <span style="color: #aaa;">→</span>
+    <span style="background: #2D6A8E; color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600;">4. PlaceDetailScreen</span>
+    <span style="color: #aaa;">→</span>
+    <span style="background: #667eea; color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600;">5. EventsScreen</span>
+    <span style="color: #aaa;">→</span>
+    <span style="background: #2D6A8E; color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600;">6. Ny HomeScreen</span>
+    <span style="color: #aaa;">→</span>
+    <span style="background: #4A7C59; color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600;">7. Karta + Färja</span>
+    <span style="color: #aaa;">→</span>
+    <span style="background: #B8860B; color: #fff; border-radius: 20px; padding: 4px 10px; font-size: 11px; font-weight: 600;">8. i18n SV/EN</span>
+  </div>
+</div>

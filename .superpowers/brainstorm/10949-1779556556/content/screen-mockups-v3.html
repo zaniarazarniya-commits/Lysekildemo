@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lysekil App Mockups</title>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    background: #EDE8E0;
+    padding: 32px 24px;
+    color: #2C2C2C;
+  }
+
+  h2 { font-size: 20px; font-weight: 700; color: #2C2C2C; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #6B6B6B; margin-bottom: 28px; }
+
+  .screens {
+    display: grid;
+    grid-template-columns: repeat(3, 220px);
+    gap: 24px;
+    justify-content: center;
+  }
+
+  .screen-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: #6B6B6B;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+  .screen-label svg { width: 14px; height: 14px; }
+
+  .phone {
+    background: #F7F5F2;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1.5px solid #C4B8A8;
+    box-shadow: 0 12px 40px rgba(27,75,102,0.14), 0 2px 8px rgba(0,0,0,0.06);
+  }
+
+  /* Ferry hero */
+  .ferry-hero {
+    background: linear-gradient(160deg, #1B4B66 0%, #2D6A8E 100%);
+    padding: 18px 16px 16px;
+    color: white;
+  }
+  .ferry-eyebrow {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+  .ferry-eyebrow svg { width: 11px; height: 11px; }
+  .ferry-countdown { font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 1; }
+  .ferry-route { font-size: 11px; opacity: 0.8; margin-top: 4px; display: flex; align-items: center; gap: 5px; }
+  .ferry-route svg { width: 11px; height: 11px; }
+  .ferry-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(4px);
+    border-radius: 20px;
+    padding: 5px 11px;
+    font-size: 10px;
+    margin-top: 10px;
+    font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .ferry-pill svg { width: 10px; height: 10px; }
+  .status-dot { width: 6px; height: 6px; border-radius: 50%; background: #7DCEA0; display: inline-block; }
+
+  /* Quick cards */
+  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; }
+  .quick-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 14px 10px 12px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .quick-icon {
+    width: 36px; height: 36px;
+    background: #EDE8E0;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 7px;
+  }
+  .quick-icon svg { width: 18px; height: 18px; color: #2D6A8E; }
+  .quick-name { font-size: 11px; font-weight: 700; color: #2C2C2C; }
+  .quick-open { font-size: 9px; color: #5A7D6B; font-weight: 600; margin-top: 3px; }
+
+  /* Section label */
+  .section-wrap { padding: 0 12px 14px; }
+  .section-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #6B6B6B;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+
+  /* Today event strip */
+  .event-strip-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 11px 13px;
+    border-left: 3px solid #2D6A8E;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .event-strip-title { font-size: 12px; font-weight: 700; color: #2C2C2C; }
+  .event-strip-meta { font-size: 10px; color: #6B6B6B; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+  .event-strip-meta svg { width: 10px; height: 10px; }
+
+  /* Header bar */
+  .header-bar {
+    background: #fff;
+    padding: 14px 14px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .screen-title { font-size: 17px; font-weight: 700; color: #2C2C2C; letter-spacing: -0.3px; }
+
+  /* Search */
+  .search-bar {
+    background: #F7F5F2;
+    border-radius: 10px;
+    padding: 8px 11px;
+    font-size: 11px;
+    color: #aaa;
+    margin-top: 9px;
+    border: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .search-bar svg { width: 13px; height: 13px; color: #aaa; flex-shrink: 0; }
+
+  /* Chips */
+  .chips { display: flex; gap: 6px; margin-top: 9px; overflow: hidden; }
+  .chip { border-radius: 20px; padding: 4px 12px; font-size: 10px; font-weight: 600; white-space: nowrap; }
+  .chip-active { background: #2D6A8E; color: #fff; }
+  .chip-inactive { background: #EDE8E0; color: #6B6B6B; }
+
+  /* Place list */
+  .place-list { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .place-card {
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .place-img { height: 58px; width: 100%; }
+  .place-body { padding: 9px 11px 11px; }
+  .place-row { display: flex; justify-content: space-between; align-items: flex-start; }
+  .place-name { font-size: 12px; font-weight: 700; color: #2C2C2C; }
+  .place-open { font-size: 9px; font-weight: 700; display: flex; align-items: center; gap: 3px; }
+  .place-open svg { width: 9px; height: 9px; }
+  .open-yes { color: #5A7D6B; }
+  .open-no { color: #B8860B; }
+  .place-meta { font-size: 10px; color: #6B6B6B; margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+  .place-meta svg { width: 10px; height: 10px; }
+  .star { color: #B8860B; }
+
+  /* Events */
+  .events-body { padding: 12px; display: flex; flex-direction: column; gap: 14px; }
+  .today-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 13px 14px;
+    border-left: 3px solid #2D6A8E;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.05);
+  }
+  .today-tag { font-size: 9px; font-weight: 700; color: #2D6A8E; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .today-title { font-size: 13px; font-weight: 700; color: #2C2C2C; }
+  .today-meta { font-size: 10px; color: #6B6B6B; margin-top: 3px; display: flex; align-items: center; gap: 4px; }
+  .today-meta svg { width: 10px; height: 10px; }
+  .today-desc { font-size: 10px; color: #6B6B6B; margin-top: 7px; line-height: 1.5; padding-top: 7px; border-top: 1px solid #EDE8E0; }
+
+  .upcoming-list { display: flex; flex-direction: column; gap: 7px; }
+  .upcoming-item {
+    background: #fff;
+    border-radius: 12px;
+    padding: 10px 12px;
+    display: flex;
+    gap: 11px;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .date-badge {
+    background: #1B4B66;
+    color: #fff;
+    border-radius: 10px;
+    padding: 6px 8px;
+    text-align: center;
+    min-width: 40px;
+    flex-shrink: 0;
+  }
+  .date-badge-num { font-size: 16px; font-weight: 700; line-height: 1; }
+  .date-badge-mon { font-size: 8px; text-transform: uppercase; opacity: 0.8; margin-top: 1px; letter-spacing: 0.3px; }
+  .date-badge.muted { background: #EDE8E0; }
+  .date-badge.muted .date-badge-num { color: #2D6A8E; }
+  .date-badge.muted .date-badge-mon { color: #6B6B6B; opacity: 1; }
+  .upcoming-title { font-size: 11px; font-weight: 700; color: #2C2C2C; }
+  .upcoming-meta { font-size: 10px; color: #6B6B6B; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+  .upcoming-meta svg { width: 10px; height: 10px; }
+
+  /* Tab bar */
+  .tab-bar {
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 4px 8px;
+  }
+  .tab-item { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+  .tab-icon-wrap { width: 28px; height: 22px; display: flex; align-items: center; justify-content: center; }
+  .tab-icon-wrap svg { width: 18px; height: 18px; }
+  .tab-label-txt { font-size: 8px; font-weight: 600; }
+  .tab-active .tab-icon-wrap svg { color: #2D6A8E; }
+  .tab-active .tab-label-txt { color: #2D6A8E; }
+  .tab-inactive .tab-icon-wrap svg { color: #C4B8A8; }
+  .tab-inactive .tab-label-txt { color: #C4B8A8; }
+
+  .caption { text-align: center; color: #6B6B6B; font-size: 13px; margin-top: 28px; }
+</style>
+</head>
+<body>
+
+<h2>Skärm-mockups — Bohuslänsk Minimalism</h2>
+<p class="subtitle">Lucide-ikoner · Samma tema som befintlig app · Hav, granit, sand</p>
+
+<div class="screens">
+
+  <!-- ── HEM ── -->
+  <div>
+    <div class="screen-label">
+      <i data-lucide="home" style="width:13px;height:13px;"></i>
+      Hem
+    </div>
+    <div class="phone">
+      <div class="ferry-hero">
+        <div class="ferry-eyebrow">
+          <i data-lucide="ship"></i>
+          Nästa färja
+        </div>
+        <div class="ferry-countdown">12 min</div>
+        <div class="ferry-route">
+          Lysekil
+          <i data-lucide="arrow-right"></i>
+          Fiskebäckskil
+        </div>
+        <div class="ferry-pill">
+          <i data-lucide="clock"></i>
+          Avgår 14:15
+          &nbsp;·&nbsp;
+          <span class="status-dot"></span>
+          I tid
+        </div>
+      </div>
+
+      <div class="quick-grid">
+        <div class="quick-card">
+          <div class="quick-icon"><i data-lucide="utensils"></i></div>
+          <div class="quick-name">Restauranger</div>
+          <div class="quick-open">12 öppna nu</div>
+        </div>
+        <div class="quick-card">
+          <div class="quick-icon"><i data-lucide="shopping-bag"></i></div>
+          <div class="quick-name">Butiker</div>
+          <div class="quick-open">8 öppna nu</div>
+        </div>
+      </div>
+
+      <div class="section-wrap">
+        <div class="section-label">Händer idag</div>
+        <div class="event-strip-card">
+          <div class="event-strip-title">Lysekils Fiskemarked</div>
+          <div class="event-strip-meta">
+            <i data-lucide="map-pin"></i>
+            Hamntorget &nbsp;·&nbsp;
+            <i data-lucide="clock"></i>
+            10:00–16:00
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-bar">
+        <div class="tab-item tab-active">
+          <div class="tab-icon-wrap"><i data-lucide="home"></i></div>
+          <div class="tab-label-txt">Hem</div>
+        </div>
+        <div class="tab-item tab-inactive">
+          <div class="tab-icon-wrap"><i data-lucide="utensils"></i></div>
+          <div class="tab-label-txt">Mat</div>
+        </div>
+        <div class="tab-item tab-inactive">
+          <div class="tab-icon-wrap"><i data-lucide="shopping-bag"></i></div>
+          <div class="tab-label-txt">Butiker</div>
+        </div>
+        <div class="tab-item tab-inactive">
+          <div class="tab-icon-wrap"><i data-lucide="calendar"></i></div>
+          <div class="tab-label-txt">Event</div>
+        </div>
+        <div class="tab-item tab-inactive">
+          <div class="tab-icon-wrap"><i data-lucide="map"></i></div>
+          <div class="tab-label-txt">Karta</div>
+        </div>
+        <div class="tab-item tab-inactive">
+          <div class="tab-icon-wrap"><i data-lucide="ship"></i></div>
+          <div class="tab-label-txt">Färja</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RESTAURANGER ── -->
+  <div>
+    <div class="screen-label">
+      <i data-lucide="utensils" style="width:13px;height:13px;"></i>
+      Restauranger
+    </div>
+    <div class="phone">
+      <div class="header-bar">
+        <div class="screen-title">Restauranger</div>
+        <div class="search-bar">
+          <i data-lucide="search"></i>
+          Sök restaurang...
+        </div>
+        <div class="chips">
+          <span class="chip chip-active">Alla</span>
+          <span class="chip chip-inactive">Mat</span>
+          <span class="chip chip-inactive">Fika</span>
+          <span class="chip chip-inactive">Bar</span>
+        </div>
+      </div>
+
+      <div class="place-list">
+        <div class="place-card">
+          <div class="place-img" style="background: linear-gradient(145deg, #1B4B66, #2D6A8E);"></div>
+          <div class="place-body">
+            <div class="place-row">
+              <div class="place-name">Hamnkrogen</div>
+              <div class="place-open open-yes">
+                <i data-lucide="circle" style="fill:#5A7D6B;"></i>
+                Öppet
+              </div>
+            </div>
+            <div class="place-meta">
+              <i data-lucide="utensils"></i>
+              Fisk &amp; skaldjur &nbsp;·&nbsp;
+              <span class="star">★</span> 4.6
+              &nbsp;·&nbsp;
+              <i data-lucide="clock"></i>
+              Stänger 22:00
+            </div>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img" style="background: linear-gradient(145deg, #2D6A8E, #4A8BAF);"></div>
+          <div class="place-body">
+            <div class="place-row">
+              <div class="place-name">Strandvillan</div>
+              <div class="place-open open-yes">
+                <i data-lucide="circle" style="fill:#5A7D6B;"></i>
+                Öppet
+              </div>
+            </div>
+            <div class="place-meta">
+              <i data-lucide="utensils"></i>
+              Middag &nbsp;·&nbsp;
+              <span class="star">★</span> 4.4
+              &nbsp;·&nbsp;
+              <i data-lucide="clock"></i>
+              Stänger 23:00
+            </div>
+          </div>
+        </div>
+
+        <div class="place-card">
+          <div class="place-img" style="background: linear-gradient(145deg, #C4B8A8, #EDE8E0);"></div>
+          <div class="place-body">
+            <div class="place-row">
+              <div class="place-name">Bryggan Café</div>
+              <div class="place-open open-no">
+                <i data-lucide="circle" style="fill:#B8860B;"></i>
+                Stängt
+              </div>
+            </div>
+            <div class="place-meta">
+              <i data-lucide="coffee"></i>
+              Fika &nbsp;·&nbsp;
+              <span class="star">★</span> 4.7
+              &nbsp;·&nbsp;
+              <i data-lucide="clock"></i>
+              Öppnar 08:00
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EVENEMANG ── -->
+  <div>
+    <div class="screen-label">
+      <i data-lucide="calendar" style="width:13px;height:13px;"></i>
+      Evenemang
+    </div>
+    <div class="phone">
+      <div class="header-bar">
+        <div class="screen-title">Evenemang</div>
+      </div>
+
+      <div class="events-body">
+        <div>
+          <div class="section-label">Händer idag</div>
+          <div class="today-card">
+            <div class="today-tag">Lördag 24 maj</div>
+            <div class="today-title">Lysekils Fiskemarked</div>
+            <div class="today-meta">
+              <i data-lucide="map-pin"></i>
+              Hamntorget &nbsp;·&nbsp;
+              <i data-lucide="clock"></i>
+              10:00–16:00
+            </div>
+            <div class="today-desc">Färsk fisk, räkor och lokala delikatesser direkt från båten.</div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-label">Kommande</div>
+          <div class="upcoming-list">
+            <div class="upcoming-item">
+              <div class="date-badge">
+                <div class="date-badge-num">28</div>
+                <div class="date-badge-mon">maj</div>
+              </div>
+              <div>
+                <div class="upcoming-title">Konsertkväll vid hamnen</div>
+                <div class="upcoming-meta">
+                  <i data-lucide="map-pin"></i>
+                  Gästhamnen &nbsp;·&nbsp;
+                  <i data-lucide="clock"></i>
+                  19:00
+                </div>
+              </div>
+            </div>
+
+            <div class="upcoming-item">
+              <div class="date-badge muted">
+                <div class="date-badge-num">1</div>
+                <div class="date-badge-mon">jun</div>
+              </div>
+              <div>
+                <div class="upcoming-title">Midsommarfirande</div>
+                <div class="upcoming-meta">
+                  <i data-lucide="map-pin"></i>
+                  Stadsparken
+                </div>
+              </div>
+            </div>
+
+            <div class="upcoming-item">
+              <div class="date-badge muted">
+                <div class="date-badge-num">7</div>
+                <div class="date-badge-mon">jun</div>
+              </div>
+              <div>
+                <div class="upcoming-title">Havets Dag</div>
+                <div class="upcoming-meta">
+                  <i data-lucide="map-pin"></i>
+                  Hamntorget &nbsp;·&nbsp;
+                  <i data-lucide="clock"></i>
+                  11:00–18:00
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p class="caption">Lucide-ikoner · Bohuslänsk Minimalism · Godkänn för att skriva designdokumentet</p>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

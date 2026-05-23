@@ -1,0 +1,42 @@
+<h2>Vilket upplägg passar bäst?</h2>
+<p class="subtitle">Tre sätt att bygga Lysekil-appen — välj den som känns rätt</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>MVP — Snabbstart ⚡</h3>
+      <p>3 enkla flikar: Restauranger, Butiker, Färja. Hämtar data från Google Places + Västtrafik. Ingen karta, ingen sökning — bara det viktigaste. Klar på kortast tid.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Fördelar</h4><ul><li>Snabbast att bygga</li><li>Lätt att testa</li><li>Tydlig fokus</li></ul></div>
+        <div class="cons"><h4>Nackdelar</h4><ul><li>Ingen karta</li><li>Ingen sökning/filter</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Innehållsfokus — Rik upplevelse 🍽️</h3>
+      <p>Restauranger och butiker i centrum med Google Places-data: foton, recensioner, öppettider, meny-länk. Karta inbyggd. Färja som egen flik med realtid. Sök + filtrera på kategori.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Fördelar</h4><ul><li>Rikt innehåll direkt</li><li>Karta för turister</li><li>Bra sök/filter</li></ul></div>
+        <div class="cons"><h4>Nackdelar</h4><ul><li>Mer att bygga</li><li>Google Places-kostnad vid hög trafik</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Full-featured — Komplett app 🗺️</h3>
+      <p>Allt i B plus: favoriter, push-notiser för färjan ("10 min till avgång!"), offline-läge för färjetider, språkväljare (SV/EN), dela plats med vänner.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Fördelar</h4><ul><li>Komplett upplevelse</li><li>Push-notiser för färja</li><li>Favoriter</li></ul></div>
+        <div class="cons"><h4>Nackdelar</h4><ul><li>Längst att bygga</li><li>Mer komplexitet</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top: 1.5rem">💡 Min rekommendation: <strong>B — Innehållsfokus</strong>. Ger en riktigt bra användarupplevelse utan att bli för komplex. Push-notiser (C) kan läggas till senare.</p>

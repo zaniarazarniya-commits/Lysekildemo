@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lysekil App Mockups</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+    background: #EDE8E0;
+    padding: 24px;
+    color: #2C2C2C;
+  }
+
+  h2 { font-size: 20px; font-weight: 700; color: #2C2C2C; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #6B6B6B; margin-bottom: 24px; }
+
+  .screens {
+    display: grid;
+    grid-template-columns: repeat(3, 220px);
+    gap: 20px;
+    justify-content: center;
+  }
+
+  .screen-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: #6B6B6B;
+    text-align: center;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* Phone frame */
+  .phone {
+    background: #F7F5F2;
+    border-radius: 24px;
+    overflow: hidden;
+    border: 1.5px solid #C4B8A8;
+    box-shadow: 0 8px 32px rgba(27,75,102,0.12);
+  }
+
+  /* ── THEME TOKENS ── */
+  /* seaBlue: #2D6A8E | deepSea: #1B4B66 | shell: #F7F5F2 | sand: #EDE8E0 */
+  /* rockDark: #2C2C2C | granite: #6B6B6B | kelp: #5A7D6B | rust: #B8860B */
+
+  .header-bar {
+    background: #fff;
+    padding: 12px 14px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .screen-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: #2C2C2C;
+    letter-spacing: -0.3px;
+  }
+
+  /* Ferry hero */
+  .ferry-hero {
+    background: linear-gradient(135deg, #1B4B66, #2D6A8E);
+    padding: 16px 14px;
+    color: white;
+  }
+  .ferry-label { font-size: 9px; font-weight: 700; letter-spacing: 1.2px; opacity: 0.75; text-transform: uppercase; margin-bottom: 4px; }
+  .ferry-countdown { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; line-height: 1; }
+  .ferry-sub { font-size: 11px; opacity: 0.8; margin-top: 4px; }
+  .ferry-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 10px;
+    margin-top: 8px;
+    font-weight: 600;
+  }
+
+  /* Quick cards */
+  .quick-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 12px;
+  }
+  .quick-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px 10px;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .quick-icon { font-size: 22px; margin-bottom: 5px; }
+  .quick-name { font-size: 11px; font-weight: 700; color: #2C2C2C; }
+  .quick-open { font-size: 10px; color: #5A7D6B; font-weight: 600; margin-top: 2px; }
+
+  /* Today event strip */
+  .today-strip { padding: 0 12px 12px; }
+  .section-label {
+    font-size: 9px;
+    font-weight: 700;
+    color: #6B6B6B;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+  .event-strip-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px 12px;
+    border-left: 3px solid #2D6A8E;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .event-strip-title { font-size: 12px; font-weight: 700; color: #2C2C2C; }
+  .event-strip-meta { font-size: 10px; color: #6B6B6B; margin-top: 2px; }
+
+  /* Search bar */
+  .search-bar {
+    background: #F7F5F2;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 11px;
+    color: #6B6B6B;
+    margin-top: 8px;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+
+  /* Filter chips */
+  .chips { display: flex; gap: 6px; margin-top: 8px; overflow: hidden; }
+  .chip {
+    border-radius: 20px;
+    padding: 4px 11px;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .chip-active { background: #2D6A8E; color: #fff; }
+  .chip-inactive { background: #EDE8E0; color: #6B6B6B; }
+
+  /* Place list */
+  .place-list { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .place-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+  .place-img {
+    height: 56px;
+    width: 100%;
+  }
+  .place-body { padding: 8px 10px 10px; }
+  .place-row { display: flex; justify-content: space-between; align-items: flex-start; }
+  .place-name { font-size: 12px; font-weight: 700; color: #2C2C2C; }
+  .place-open { font-size: 9px; font-weight: 700; }
+  .open-yes { color: #5A7D6B; }
+  .open-no { color: #C0392B; }
+  .place-meta { font-size: 10px; color: #6B6B6B; margin-top: 2px; }
+
+  /* Events screen */
+  .events-body { padding: 10px; display: flex; flex-direction: column; gap: 12px; }
+  .today-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 12px;
+    border-left: 3px solid #2D6A8E;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+  .today-tag { font-size: 9px; font-weight: 700; color: #2D6A8E; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .today-title { font-size: 13px; font-weight: 700; color: #2C2C2C; }
+  .today-meta { font-size: 10px; color: #6B6B6B; margin-top: 2px; }
+  .today-desc { font-size: 10px; color: #6B6B6B; margin-top: 6px; line-height: 1.5; }
+
+  .upcoming-list { display: flex; flex-direction: column; gap: 6px; }
+  .upcoming-item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .date-badge {
+    background: #1B4B66;
+    color: #fff;
+    border-radius: 8px;
+    padding: 5px 8px;
+    text-align: center;
+    min-width: 38px;
+    flex-shrink: 0;
+  }
+  .date-badge-num { font-size: 15px; font-weight: 700; line-height: 1; }
+  .date-badge-mon { font-size: 8px; text-transform: uppercase; opacity: 0.85; margin-top: 1px; }
+  .date-badge.muted { background: #EDE8E0; }
+  .date-badge.muted .date-badge-num { color: #2D6A8E; }
+  .date-badge.muted .date-badge-mon { color: #6B6B6B; }
+  .upcoming-title { font-size: 11px; font-weight: 700; color: #2C2C2C; }
+  .upcoming-meta { font-size: 10px; color: #6B6B6B; margin-top: 1px; }
+
+  /* Bottom tab bar */
+  .tab-bar {
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.07);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 2px 6px;
+  }
+  .tab-item { text-align: center; }
+  .tab-icon { font-size: 14px; }
+  .tab-label { font-size: 8px; font-weight: 600; margin-top: 2px; }
+  .tab-active .tab-label { color: #2D6A8E; }
+  .tab-inactive .tab-label { color: #6B6B6B; }
+</style>
+</head>
+<body>
+<h2>Skärm-mockups — Bohuslänsk Minimalism</h2>
+<p class="subtitle">Exakt samma tema som befintlig app · Hav, granit, sand</p>
+
+<div class="screens">
+
+  <!-- ── HEM ── -->
+  <div>
+    <div class="screen-label">🏠 Hem</div>
+    <div class="phone">
+      <div class="ferry-hero">
+        <div class="ferry-label">⛴ Nästa färja</div>
+        <div class="ferry-countdown">12 min</div>
+        <div class="ferry-sub">Lysekil → Fiskebäckskil</div>
+        <div class="ferry-pill">🕐 Avgår 14:15 · I tid</div>
+      </div>
+      <div class="quick-grid">
+        <div class="quick-card">
+          <div class="quick-icon">🍽️</div>
+          <div class="quick-name">Restauranger</div>
+          <div class="quick-open">12 öppna nu</div>
+        </div>
+        <div class="quick-card">
+          <div class="quick-icon">🛍️</div>
+          <div class="quick-name">Butiker</div>
+          <div class="quick-open">8 öppna nu</div>
+        </div>
+      </div>
+      <div class="today-strip">
+        <div class="section-label">Händer idag</div>
+        <div class="event-strip-card">
+          <div class="event-strip-title">Lysekils Fiskemarked</div>
+          <div class="event-strip-meta">Hamntorget · 10:00–16:00</div>
+        </div>
+      </div>
+      <div class="tab-bar">
+        <div class="tab-item tab-active"><div class="tab-icon">🏠</div><div class="tab-label" style="color:#2D6A8E;">Hem</div></div>
+        <div class="tab-item tab-inactive"><div class="tab-icon">🍽️</div><div class="tab-label">Mat</div></div>
+        <div class="tab-item tab-inactive"><div class="tab-icon">🛍️</div><div class="tab-label">Butiker</div></div>
+        <div class="tab-item tab-inactive"><div class="tab-icon">📅</div><div class="tab-label">Event</div></div>
+        <div class="tab-item tab-inactive"><div class="tab-icon">🗺️</div><div class="tab-label">Karta</div></div>
+        <div class="tab-item tab-inactive"><div class="tab-icon">⛴️</div><div class="tab-label">Färja</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RESTAURANGER ── -->
+  <div>
+    <div class="screen-label">🍽️ Restauranger</div>
+    <div class="phone">
+      <div class="header-bar">
+        <div class="screen-title">Restauranger</div>
+        <div class="search-bar">🔍&nbsp; Sök restaurang...</div>
+        <div class="chips">
+          <span class="chip chip-active">Alla</span>
+          <span class="chip chip-inactive">Mat</span>
+          <span class="chip chip-inactive">Fika</span>
+          <span class="chip chip-inactive">Bar</span>
+        </div>
+      </div>
+      <div class="place-list">
+        <div class="place-card">
+          <div class="place-img" style="background: linear-gradient(135deg, #1B4B66, #2D6A8E);"></div>
+          <div class="place-body">
+            <div class="place-row">
+              <div class="place-name">Hamnkrogen</div>
+              <div class="place-open open-yes">● Öppet</div>
+            </div>
+            <div class="place-meta">Fisk & skaldjur · ⭐ 4.6 · Stänger 22:00</div>
+          </div>
+        </div>
+        <div class="place-card">
+          <div class="place-img" style="background: linear-gradient(135deg, #2D6A8E, #4A8BAF);"></div>
+          <div class="place-body">
+            <div class="place-row">
+              <div class="place-name">Strandvillan</div>
+              <div class="place-open open-yes">● Öppet</div>
+            </div>
+            <div class="place-meta">Middag · ⭐ 4.4 · Stänger 23:00</div>
+          </div>
+        </div>
+        <div class="place-card">
+          <div class="place-img" style="background: linear-gradient(135deg, #C4B8A8, #EDE8E0);"></div>
+          <div class="place-body">
+            <div class="place-row">
+              <div class="place-name">Bryggan Café</div>
+              <div class="place-open open-no">● Stängt</div>
+            </div>
+            <div class="place-meta">Fika · ⭐ 4.7 · Öppnar 08:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EVENEMANG ── -->
+  <div>
+    <div class="screen-label">📅 Evenemang</div>
+    <div class="phone">
+      <div class="header-bar">
+        <div class="screen-title">Evenemang</div>
+      </div>
+      <div class="events-body">
+        <div>
+          <div class="section-label">Händer idag</div>
+          <div class="today-card">
+            <div class="today-tag">Lördag 24 maj</div>
+            <div class="today-title">Lysekils Fiskemarked</div>
+            <div class="today-meta">Hamntorget · 10:00–16:00</div>
+            <div class="today-desc">Färsk fisk, räkor och lokala delikatesser direkt från båten.</div>
+          </div>
+        </div>
+        <div>
+          <div class="section-label">Kommande</div>
+          <div class="upcoming-list">
+            <div class="upcoming-item">
+              <div class="date-badge">
+                <div class="date-badge-num">28</div>
+                <div class="date-badge-mon">maj</div>
+              </div>
+              <div>
+                <div class="upcoming-title">Konsertkväll vid hamnen</div>
+                <div class="upcoming-meta">Gästhamnen · 19:00</div>
+              </div>
+            </div>
+            <div class="upcoming-item">
+              <div class="date-badge muted">
+                <div class="date-badge-num">1</div>
+                <div class="date-badge-mon">jun</div>
+              </div>
+              <div>
+                <div class="upcoming-title">Midsommarfirande</div>
+                <div class="upcoming-meta">Stadsparken · Hela dagen</div>
+              </div>
+            </div>
+            <div class="upcoming-item">
+              <div class="date-badge muted">
+                <div class="date-badge-num">7</div>
+                <div class="date-badge-mon">jun</div>
+              </div>
+              <div>
+                <div class="upcoming-title">Havets Dag</div>
+                <div class="upcoming-meta">Hamntorget · 11:00–18:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align: center; color: #6B6B6B; font-size: 13px; margin-top: 24px;">Ser detta rätt ut? Godkänn så skriver vi designdokumentet.</p>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<h2>Vad vi redan har — och vad som är nytt</h2>
+<p class="subtitle">Grön = återanvänds direkt · Gul = anpassas · Röd = byts ut / ny</p>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 1.5rem;">
+
+  <!-- KEEP -->
+  <div style="background: rgba(74,124,89,0.08); border: 1.5px solid #4A7C59; border-radius: 12px; padding: 16px;">
+    <div style="font-size: 11px; font-weight: 700; color: #4A7C59; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">✅ Återanvänds direkt</div>
+    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #4A7C59; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>theme.ts</strong><br><span style="font-size: 12px; color: #666;">Hela designsystemet — färger, spacing, typografi</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #4A7C59; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>App.tsx</strong> (struktur)<br><span style="font-size: 12px; color: #666;">Bottom tab navigator, nya flikar sätts in</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #4A7C59; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>FerryDirect.tsx</strong><br><span style="font-size: 12px; color: #666;">Nedräkning, schema, påminnelse — bara byt statisk data mot Västtrafik API</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #4A7C59; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>MapScreen.tsx</strong><br><span style="font-size: 12px; color: #666;">Karta + filter chips — byt filter till Restaurang/Butik</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #4A7C59; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>pois.ts</strong> (typer + utils)<br><span style="font-size: 12px; color: #666;">POI-typer, filterPOIs, getDistanceMeters — används för Google Places-data</span></div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- NEW -->
+  <div style="background: rgba(45,106,142,0.08); border: 1.5px solid #2D6A8E; border-radius: 12px; padding: 16px;">
+    <div style="font-size: 11px; font-weight: 700; color: #2D6A8E; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px;">🆕 Nytt att bygga</div>
+    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px;">
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #2D6A8E; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>GooglePlacesService</strong><br><span style="font-size: 12px; color: #666;">Hämta restauranger + butiker, foton, rating, öppettider</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #2D6A8E; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>RestaurantsScreen</strong><br><span style="font-size: 12px; color: #666;">Lista med foto, rating, kategori, öppet/stängt</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #2D6A8E; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>ShopsScreen</strong><br><span style="font-size: 12px; color: #666;">Lista med butikskategorier och öppettider</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #2D6A8E; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>PlaceDetailScreen</strong><br><span style="font-size: 12px; color: #666;">Detaljsida: foton, adress, telefon, öppettider, karta</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #2D6A8E; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>VästtrafikService + HomeScreen</strong><br><span style="font-size: 12px; color: #666;">Ny startsida med färjestatus-widget + snabblinks. Riktigt API för färjan.</span></div>
+      </li>
+      <li style="display: flex; align-items: flex-start; gap: 8px;">
+        <span style="color: #2D6A8E; font-weight: 700; flex-shrink: 0;">●</span>
+        <div><strong>i18n (SV/EN)</strong><br><span style="font-size: 12px; color: #666;">Enkelt översättningslager för två språk</span></div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div style="background: rgba(180,130,11,0.08); border: 1.5px solid #B8860B; border-radius: 12px; padding: 14px; margin-top: 14px;">
+  <div style="font-size: 11px; font-weight: 700; color: #B8860B; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">⚠️ Tas bort</div>
+  <p style="margin: 0; font-size: 13px; color: #555;">CoastWeather.tsx, HarborLive.tsx — kommunfunktioner som inte längre behövs.</p>
+</div>
+
+<p class="subtitle" style="margin-top: 1.5rem">💡 Uppskattning: ~60% av grunden finns redan. Vi behöver bygga Google Places-integration + 3 nya skärmar + byta ut HomeScreen.</p>
