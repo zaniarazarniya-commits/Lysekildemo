@@ -16,14 +16,8 @@ import MapView, { Marker, Region } from "react-native-maps";
 import {
     Layers,
     Utensils,
-    Waves,
-    Car,
-    Zap,
-    Toilet,
-    X,
-    Bus,
     ShoppingBag,
-    Bed,
+    X,
 } from "lucide-react-native";
 import { colors, shadows, radius, spacing, typography } from "../theme";
 import {
@@ -37,15 +31,9 @@ const { width, height } = Dimensions.get("window");
 
 /* ── Filter Chips Configuration ── */
 const FILTERS: { key: POICategory | "all"; label: string; icon: any }[] = [
-    { key: "all", label: "Allt", icon: Layers },
-    { key: "restaurant", label: "Mat", icon: Utensils },
-    { key: "beach", label: "Bad", icon: Waves },
-    { key: "parking", label: "Parkering", icon: Car },
-    { key: "charging", label: "Laddning", icon: Zap },
-    { key: "toilet", label: "Toalett", icon: Toilet },
-    { key: "bus", label: "Buss", icon: Bus },
-    { key: "shop", label: "Butik", icon: ShoppingBag },
-    { key: "hotel", label: "Boende", icon: Bed },
+    { key: "all",        label: "Allt",        icon: Layers },
+    { key: "restaurant", label: "Restauranger", icon: Utensils },
+    { key: "shop",       label: "Butiker",      icon: ShoppingBag },
 ];
 
 /* ── Lysekil Default Region ── */
@@ -196,7 +184,7 @@ const styles = StyleSheet.create({
         position: "relative",
     },
     map: {
-        ...StyleSheet.absoluteFillObject,
+        ...StyleSheet.absoluteFill,
     },
 
     /* Filter Chips */

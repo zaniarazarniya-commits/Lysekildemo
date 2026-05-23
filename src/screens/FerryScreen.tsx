@@ -5,7 +5,7 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Vibration } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Vibration, SafeAreaView } from "react-native";
 import { Ship, Clock, Bell, Bus } from "lucide-react-native";
 import { colors, shadows, radius, spacing, typography } from "../theme";
 
@@ -53,8 +53,9 @@ export default function FerryDirect() {
     };
 
     return (
+        <SafeAreaView style={{ flex: 1, backgroundColor: colors.shellWhite }}>
         <View style={styles.container}>
-            <Text style={styles.header}>Färje-Direct</Text>
+            <Text style={styles.header}>Färja</Text>
 
             {/* Countdown Card */}
             <View style={styles.countdownCard}>
@@ -139,6 +140,7 @@ export default function FerryDirect() {
                 </View>
             </View>
         </View>
+        </SafeAreaView>
     );
 }
 

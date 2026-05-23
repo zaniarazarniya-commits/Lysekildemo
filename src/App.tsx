@@ -1,90 +1,104 @@
 /**
- * LYSEKIL GUIDE APP — ROOT NAVIGATION
- * Expo + React Navigation (Bottom Tabs)
+ * LYSEKIL APP — ROOT NAVIGATION
+ * 6 flikar: Hem, Restauranger, Butiker, Evenemang, Karta, Färja
  */
 
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-    Compass,
-    Map,
-    Utensils,
-    Ship,
-    Menu,
-} from "lucide-react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Home, Utensils, ShoppingBag, Calendar, Map, Ship } from "lucide-react-native";
 import { colors } from "./theme";
 
-/* Screens */
 import HomeScreen from "./screens/HomeScreen";
-import MapScreen from "./components/MapScreen";
+import RestaurantsScreen from "./screens/RestaurantsScreen";
+import ShopsScreen from "./screens/ShopsScreen";
+import EventsScreen from "./screens/EventsScreen";
+import MapScreen from "./screens/MapScreen";
+import FerryScreen from "./screens/FerryScreen";
+import PlaceDetailScreen from "./screens/PlaceDetailScreen";
+import { I18nProvider } from "./i18n";
 
-/* Features (also serve as tab screens) */
-import CoastWeather from "./features/CoastWeather";
-import FerryDirect from "./features/FerryDirect";
-import HarborLive from "./features/HarborLive";
+// Cast needed because PlaceDetailScreen uses route.params which isn't in the generic FunctionComponent<{}>
+const PlaceDetail = PlaceDetailScreen as React.ComponentType<any>;
 
-/* ── Tab Navigator ── */
 const Tab = createBottomTabNavigator();
+const RestaurantStack = createNativeStackNavigator();
+const ShopStack = createNativeStackNavigator();
+const MapStack = createNativeStackNavigator();
 
-/* Simple placeholder for Lunch tab */
-function LunchScreen() {
-    return (
-        <CoastWeather />
-    );
+function RestaurantsTab() {
+  return (
+    <RestaurantStack.Navigator screenOptions={{ headerShown: false }}>
+      <RestaurantStack.Screen name="RestaurantsList" component={RestaurantsScreen} />
+      <RestaurantStack.Screen name="PlaceDetail" component={PlaceDetail} />
+    </RestaurantStack.Navigator>
+  );
 }
 
-/* Simple placeholder for More tab */
-function MoreScreen() {
-    return (
-        <HarborLive />
-    );
+function ShopsTab() {
+  return (
+    <ShopStack.Navigator screenOptions={{ headerShown: false }}>
+      <ShopStack.Screen name="ShopsList" component={ShopsScreen} />
+      <ShopStack.Screen name="PlaceDetail" component={PlaceDetail} />
+    </ShopStack.Navigator>
+  );
 }
+
+function MapTab() {
+  return (
+    <MapStack.Navigator screenOptions={{ headerShown: false }}>
+      <MapStack.Screen name="MapMain" component={MapScreen} />
+      <MapStack.Screen name="PlaceDetail" component={PlaceDetail} />
+    </MapStack.Navigator>
+  );
+}
+
+const TAB_ICON_SIZE = 22;
 
 export default function App() {
-    return (
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={({ route }) => ({
-                    headerShown: false,
-                    tabBarStyle: {
-                        height: 72,
-                        paddingBottom: 8,
-                        backgroundColor: colors.foamWhite,
-                        borderTopColor: "rgba(0,0,0,0.06)",
-                        borderTopWidth: 1,
-                    },
-                    tabBarActiveTintColor: colors.seaBlue,
-                    tabBarInactiveTintColor: colors.graniteGrey,
-                    tabBarLabelStyle: {
-                        fontSize: 11,
-                        fontWeight: "600",
-                        marginTop: 2,
-                    },
-                    tabBarIcon: ({ color, size }: { color: string; size: number }) => {
-                        switch (route.name) {
-                            case "Upptäck":
-                                return <Compass size={size} color={color} />;
-                            case "Karta":
-                                return <Map size={size} color={color} />;
-                            case "Lunch":
-                                return <Utensils size={size} color={color} />;
-                            case "Maritimt":
-                                return <Ship size={size} color={color} />;
-                            case "Mer":
-                                return <Menu size={size} color={color} />;
-                            default:
-                                return <Compass size={size} color={color} />;
-                        }
-                    },
-                })}
-            >
-                <Tab.Screen name="Upptäck" component={HomeScreen} />
-                <Tab.Screen name="Karta" component={MapScreen} />
-                <Tab.Screen name="Lunch" component={LunchScreen} />
-                <Tab.Screen name="Maritimt" component={FerryDirect} />
-                <Tab.Screen name="Mer" component={MoreScreen} />
-            </Tab.Navigator>
-        </NavigationContainer>
-    );
+  return (
+    <I18nProvider>
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            headerShown: false,
+            tabBarStyle: {
+              height: 72,
+              paddingBottom: 10,
+              paddingTop: 6,
+              backgroundColor: colors.white,
+              borderTopColor: "rgba(0,0,0,0.07)",
+              borderTopWidth: 1,
+            },
+            tabBarActiveTintColor: colors.seaBlue,
+            tabBarInactiveTintColor: colors.driftwood,
+            tabBarLabelStyle: {
+              fontSize: 10,
+              fontWeight: "600",
+              marginTop: 2,
+            },
+            tabBarIcon: ({ color }) => {
+              switch (route.name) {
+                case "Hem":           return <Home size={TAB_ICON_SIZE} color={color} />;
+                case "Restauranger":  return <Utensils size={TAB_ICON_SIZE} color={color} />;
+                case "Butiker":       return <ShoppingBag size={TAB_ICON_SIZE} color={color} />;
+                case "Evenemang":     return <Calendar size={TAB_ICON_SIZE} color={color} />;
+                case "Karta":         return <Map size={TAB_ICON_SIZE} color={color} />;
+                case "Färja":         return <Ship size={TAB_ICON_SIZE} color={color} />;
+                default:              return <Home size={TAB_ICON_SIZE} color={color} />;
+              }
+            },
+          })}
+        >
+          <Tab.Screen name="Hem"          component={HomeScreen} />
+          <Tab.Screen name="Restauranger" component={RestaurantsTab} />
+          <Tab.Screen name="Butiker"      component={ShopsTab} />
+          <Tab.Screen name="Evenemang"    component={EventsScreen} />
+          <Tab.Screen name="Karta"        component={MapTab} />
+          <Tab.Screen name="Färja"        component={FerryScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </I18nProvider>
+  );
 }
